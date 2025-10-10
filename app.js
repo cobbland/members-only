@@ -12,8 +12,10 @@ app.set("view engine", "ejs");
 // routes and route variables
 const routesPath = path.join(__dirname, 'routes');
 const indexRouter = require(path.join(routesPath, 'indexRouter'));
+const signUpRouter = require(path.join(routesPath, 'signUpRouter'));
 
 app.use('/', indexRouter);
+app.use('/sign-up', signUpRouter);
 
 // here we go!
 const PORT = process.env.PORT || 8080;

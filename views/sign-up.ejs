@@ -1,5 +1,19 @@
 <%- include('head-er') %>
 
-<p>Here we are.</p>
+<p><%= locals.message %></p>
+
+<form action="/sign-up" method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" value="<%= locals.username %>">
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" value="<%= locals.password %>">
+    <label for="password-again">Reenter Password</label>
+    <input type="password" name="password-again" id="password-again">
+    <label for="given-name">Given Name</label>
+    <input type="text" name="given-name" id="given-name" value="<%= locals.givenName %>">
+    <label for="family-name">Family Name</label>
+    <input type="text" name="family-name" id="family-name" value="<%= locals.familyName %>">
+    <input type="button" value="Sign Up">
+</form>
 
 <%- include('footer') %>
