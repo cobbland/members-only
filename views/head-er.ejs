@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member's Only
+        <% if (locals.title) { %>
+            | <%= locals.title %>
+        <% } %>
+    </title>
+</head>
+<body>
+    
+<header>
+    <h1 class="title">Member's Only</h1>
+    
+    <%- include('nav') %>
+</header>
+
+<h1><%= locals.title %></h1>
