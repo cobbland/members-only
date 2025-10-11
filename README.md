@@ -4,4 +4,4 @@ Members Only is a semiprivate message board, made as part of [The Odin Project](
 
 ## Todo
 
-- [ ] 
+- [ ] Add sign-up validation, including a [custom validator](https://express-validator.github.io/docs/guides/customizing/) 
