@@ -4,16 +4,16 @@
 
 <form action="/sign-up" method="POST">
     <label for="username">Username</label>
-    <input type="text" name="username" id="username" value="<%= locals.username %>">
+    <input type="text" name="username" id="username" value="<%= locals.username %>" required>
     <label for="password">Password</label>
-    <input type="password" name="password" id="password" value="<%= locals.password %>">
+    <input type="password" name="password" id="password" value="<%= locals.password %>" required>
     <label for="password-again">Reenter Password</label>
-    <input type="password" name="password-again" id="password-again">
-    <label for="given-name">Given Name</label>
-    <input type="text" name="given-name" id="given-name" value="<%= locals.givenName %>">
-    <label for="family-name">Family Name</label>
-    <input type="text" name="family-name" id="family-name" value="<%= locals.familyName %>">
-    <input type="button" value="Sign Up">
+    <input type="password" name="password-again" id="password-again" required>
+    <label for="givenName">Given Name</label>
+    <input type="text" name="givenName" id="givenName" value="<%= locals.givenName %>">
+    <label for="familyName">Family Name</label>
+    <input type="text" name="familyName" id="familyName" value="<%= locals.familyName %>">
+    <input type="submit" value="Sign Up">
 </form>
 
 <%- include('footer') %>

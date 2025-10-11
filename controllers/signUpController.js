@@ -1,4 +1,4 @@
-// import db functions (after making them)
+const db = require('../db/queries');
 
 // validators for form data, including matching passwords
 
@@ -9,9 +9,22 @@ function getSignUp(req, res) {
     });
 }
 
-// make postSignUp function
-// here
+async function postSignUp(req, res) {
+    const {
+        username, password, 
+        givenName, familyName,
+    } = req.body;
+    try {
+        await db.insertUser(username, password, givenName, familyName);
+        res.redirect('/');
+    } catch(err) {
+        res.render('sign-up', {
+            title: 'Sign Up',
+            message: err,
+        });
+    }
+}
 
 module.exports = {
-    getSignUp,
+    getSignUp, postSignUp,
 }
