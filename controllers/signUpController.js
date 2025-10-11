@@ -1,4 +1,5 @@
 const db = require('../db/queries');
+const bcrypt = require('bcryptjs');
 
 // validators for form data, including matching passwords
 
@@ -15,7 +16,8 @@ async function postSignUp(req, res) {
         givenName, familyName,
     } = req.body;
     try {
-        await db.insertUser(username, password, givenName, familyName);
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await db.insertUser(username, hashedPassword, givenName, familyName);
         res.redirect('/');
     } catch(err) {
         res.render('sign-up', {
