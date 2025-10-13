@@ -12,6 +12,18 @@ async function insertUser(username, password, givenName, familyName) {
     }
 }
 
+async function selectUser(username) {
+    try {
+        const { rows } = await pool.query(`
+            SELECT * FROM users
+            WHERE username = $1;
+        `, [ username ]);
+        return rows[0];
+    } catch(err) {
+        throw new Error(err);
+    }
+}
+
 module.exports = {
-    insertUser,
+    insertUser, selectUser,
 }

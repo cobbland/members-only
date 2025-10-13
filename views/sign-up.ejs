@@ -1,14 +1,21 @@
 <%- include('head-er') %>
 
 <p><%= locals.message %></p>
+<% if (locals.errors) { %>
+    <ul>
+        <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
 
 <form action="/sign-up" method="POST">
     <label for="username">Username</label>
     <input type="text" name="username" id="username" value="<%= locals.username %>" required>
     <label for="password">Password</label>
     <input type="password" name="password" id="password" value="<%= locals.password %>" required>
-    <label for="password-again">Reenter Password</label>
-    <input type="password" name="password-again" id="password-again" required>
+    <label for="passwordAgain">Reenter Password</label>
+    <input type="password" name="passwordAgain" id="passwordAgain" required>
     <label for="givenName">Given Name</label>
     <input type="text" name="givenName" id="givenName" value="<%= locals.givenName %>">
     <label for="familyName">Family Name</label>
