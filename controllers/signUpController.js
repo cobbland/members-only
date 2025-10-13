@@ -24,6 +24,14 @@ const validateUser = [
     body('familyName').trim(),
 ];
 
+const validateClubPassword = body('clubPassword').custom(value => {
+    if (value === 'gravy') {
+        return true;
+    } else {
+        throw new Error('That is not the club password')
+    }
+});
+
 // functions
 function getSignUp(req, res) {
     res.render('sign-up', {
@@ -51,7 +59,7 @@ async function postSignUp(req, res) {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         await db.insertUser(username, hashedPassword, givenName, familyName);
-        res.redirect('/');
+        res.redirect('/join-club');
     } catch(err) {
         res.render('sign-up', {
             title: 'Sign Up',
@@ -63,7 +71,37 @@ async function postSignUp(req, res) {
     }
 }
 
+function getJoinClub(req, res) {
+    res.render('join-club', {
+        title: 'Join the Club',
+        message: 'Enter club password to join the club and become a member.'
+    });
+}
+
+async function postJoinClub(req, res) {
+    const { clubPassword } = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).render('join-club', {
+            title: 'Join the Club',
+            message: errors.array()[0].msg,
+        });
+    }
+    try {
+        // TKTK hardcoded user until login is implemented 
+        await db.joinClub('cobbland');
+        res.redirect('/');
+    } catch(err) {
+        return res.status(400).render('join-club', {
+            title: 'Join the Club',
+            message: err,
+        });
+    }
+}
+
 //exports
 module.exports = {
-    validateUser, getSignUp, postSignUp,
+    validateUser, validateClubPassword,
+    getSignUp, postSignUp,
+    getJoinClub, postJoinClub,
 }
