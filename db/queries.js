@@ -36,7 +36,19 @@ async function joinClub(username) {
     }
 }
 
+async function makeAdmin(username) {
+    try {
+        await pool.query(`
+            UPDATE users
+            SET admin = true
+            WHERE username = $1
+        `, [ username ]);
+    } catch(err) {
+        throw new Error(err);
+    }
+}
+
 module.exports = {
     insertUser, selectUser,
-    joinClub,
+    joinClub, makeAdmin,
 }

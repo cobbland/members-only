@@ -32,6 +32,14 @@ const validateClubPassword = body('clubPassword').custom(value => {
     }
 });
 
+const validateAdminPassword = body('adminPassword').custom(value => {
+    if (value === '753694') {
+        return true;
+    } else {
+        throw new Error('That is not the admin password')
+    }
+})
+
 // functions
 function getSignUp(req, res) {
     res.render('sign-up', {
@@ -79,7 +87,6 @@ function getJoinClub(req, res) {
 }
 
 async function postJoinClub(req, res) {
-    const { clubPassword } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).render('join-club', {
@@ -99,9 +106,38 @@ async function postJoinClub(req, res) {
     }
 }
 
+function getMakeAdmin(req, res) {
+    res.render('make-admin', {
+        title: 'Become an Admin',
+        message: 'Enter admin password to become an admin.'
+    });
+}
+
+async function postMakeAdmin(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).render('make-admin', {
+            title: 'Become an Admin',
+            message: errors.array()[0].msg,
+        });
+    }
+    try {
+        // TKTK hardcoded user until login is implemented 
+        await db.makeAdmin('cobbland');
+        res.redirect('/');
+    } catch(err) {
+        return res.status(400).render('make-admin', {
+            title: 'Become an Admin',
+            message: err,
+        });
+    }
+}
+
 //exports
 module.exports = {
     validateUser, validateClubPassword,
+    validateAdminPassword,
     getSignUp, postSignUp,
     getJoinClub, postJoinClub,
+    getMakeAdmin, postMakeAdmin,
 }

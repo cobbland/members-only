@@ -7,5 +7,7 @@ router.get('/', controller.getSignUp);
 router.post('/', controller.validateUser, controller.postSignUp);
 router.get('/join-club', controller.getJoinClub);
 router.post('/join-club', controller.validateClubPassword, controller.postJoinClub);
+router.get('/make-admin', controller.getMakeAdmin);
+router.post('/make-admin', controller.validateAdminPassword, controller.postMakeAdmin);
 
 module.exports = router;
