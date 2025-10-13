@@ -1,3 +1,4 @@
+// imports
 const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
@@ -23,6 +24,7 @@ const validateUser = [
     body('familyName').trim(),
 ];
 
+// functions
 function getSignUp(req, res) {
     res.render('sign-up', {
         title: 'Sign Up',
@@ -61,6 +63,7 @@ async function postSignUp(req, res) {
     }
 }
 
+//exports
 module.exports = {
     validateUser, getSignUp, postSignUp,
 }
