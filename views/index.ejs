@@ -2,6 +2,12 @@
 
 <p><%= locals.message %></p>
 
-<a class="btn" href="/log-in">Log In</a>
+<% if (!locals.currentUser) { %>
+    <a class="btn" href="/log-in">Log In</a>
+<% } else if (!locals.currentUser.membership) { %>
+    <a class="btn" href="/sign-up/join-club">Become a Member</a>
+<% } else if (!locals.currentUser.admin) { %>
+    <a class="btn" href="/sign-up/make-admin">Become an Admin</a>
+<% } %>
 
 <%- include('footer') %>

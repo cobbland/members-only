@@ -17,7 +17,9 @@
     <%- include('nav') %>
 
     <% if (locals.currentUser) { %>
-        <p class="user-info">Logged in as <%= locals.currentUser.username %></p>
+        <p class="user-info">Logged in as <%= locals.currentUser.username %>.
+            <a href="/log-out">Log out?</a>
+        </p>
     <% } %>
 </header>
 

@@ -95,8 +95,7 @@ async function postJoinClub(req, res) {
         });
     }
     try {
-        // TKTK hardcoded user until login is implemented 
-        await db.joinClub('cobbland');
+        await db.joinClub(res.locals.currentUser.username);
         res.redirect('/');
     } catch(err) {
         return res.status(400).render('join-club', {
@@ -122,8 +121,7 @@ async function postMakeAdmin(req, res) {
         });
     }
     try {
-        // TKTK hardcoded user until login is implemented 
-        await db.makeAdmin('cobbland');
+        await db.makeAdmin(res.locals.currentUser.username);
         res.redirect('/');
     } catch(err) {
         return res.status(400).render('make-admin', {
