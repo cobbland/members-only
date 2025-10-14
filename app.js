@@ -31,11 +31,13 @@ app.use((req, res, next) => {
 const routesPath = path.join(__dirname, 'routes');
 const indexRouter = require(path.join(routesPath, 'indexRouter'));
 const signUpRouter = require(path.join(routesPath, 'signUpRouter'));
-const logInRouter = require(path.join(routesPath, 'logInRouter'))
+const logInRouter = require(path.join(routesPath, 'logInRouter'));
+const messagesRouter = require(path.join(routesPath, 'messagesRouter'));
 
 app.use('/', indexRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/log-in', logInRouter);
+app.use('/messages', messagesRouter);
 
 // here we go!
 const PORT = process.env.PORT || 8080;

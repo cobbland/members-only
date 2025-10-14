@@ -60,7 +60,19 @@ async function makeAdmin(username) {
     }
 }
 
+async function selectAllMessages() {
+    try {
+        const messages = await pool.query(`
+            SELECT * FROM messages;    
+        `)
+        return messages;
+    } catch(err) {
+        throw new Error(err);
+    }
+}
+
 module.exports = {
     insertUser, selectUser, selectUserByID,
     joinClub, makeAdmin,
+    selectAllMessages,
 }
