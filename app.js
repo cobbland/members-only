@@ -1,6 +1,10 @@
 // imports
 const express = require('express');
 const path = require('node:path');
+const session = require('express-session');
+const passport = require('passport');
+
+require('./config/passport')(passport);
 
 // initializations and such
 const app = express();
@@ -9,6 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(session({
+    secret: "cat's cradle",
+    resave: false,
+    saveUninitialized: false,
+}));
+app.use(passport.session());
+
+// some middleware
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 // routes and route variables
 const routesPath = path.join(__dirname, 'routes');

@@ -3,9 +3,7 @@ const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
 
-const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 
 // validators for form data, including matching passwords
 
@@ -18,7 +16,12 @@ function getLogIn(req, res) {
     });
 }
 
+const postLogIn = passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/log-in',
+})
+
 //exports
 module.exports = {
-    getLogIn,
+    getLogIn, postLogIn,
 }

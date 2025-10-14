@@ -24,6 +24,18 @@ async function selectUser(username) {
     }
 }
 
+async function selectUserByID(id) {
+    try {
+        const { rows } = await pool.query(`
+            SELECT * FROM users
+            WHERE id = $1;
+        `, [ id ]);
+        return rows[0];
+    } catch(err) {
+        throw new Error(err);
+    }
+}
+
 async function joinClub(username) {
     try {
         await pool.query(`
@@ -49,6 +61,6 @@ async function makeAdmin(username) {
 }
 
 module.exports = {
-    insertUser, selectUser,
+    insertUser, selectUser, selectUserByID,
     joinClub, makeAdmin,
 }

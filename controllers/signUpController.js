@@ -67,7 +67,7 @@ async function postSignUp(req, res) {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         await db.insertUser(username, hashedPassword, givenName, familyName);
-        res.redirect('/join-club');
+        res.redirect('/sign-up/join-club');
     } catch(err) {
         res.render('sign-up', {
             title: 'Sign Up',

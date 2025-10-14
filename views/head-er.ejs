@@ -15,6 +15,10 @@
     <h1 class="title">Member's Only</h1>
     
     <%- include('nav') %>
+
+    <% if (locals.currentUser) { %>
+        <p class="user-info">Logged in as <%= locals.currentUser.username %></p>
+    <% } %>
 </header>
 
 <h1><%= locals.title %></h1>
