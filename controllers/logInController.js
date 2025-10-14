@@ -6,7 +6,9 @@ const { body, validationResult } = require('express-validator');
 const passport = require('passport');
 
 // validators for form data, including matching passwords
-
+const validateUsername = [
+    body('username').trim().notEmpty()
+];
 
 // functions
 function getLogIn(req, res) {
@@ -28,5 +30,5 @@ const postLogIn = passport.authenticate('local', {
 
 //exports
 module.exports = {
-    getLogIn, postLogIn,
+    validateUsername, getLogIn, postLogIn,
 }
