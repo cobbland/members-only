@@ -10,15 +10,20 @@ const passport = require('passport');
 
 // functions
 function getLogIn(req, res) {
+    let message = 'Log in here.'
+    if (req.session.messages) {
+        message = req.session.messages;
+    }
     res.render('log-in', {
         title: 'Log In',
-        message: 'Log in here.'
+        message: message,
     });
 }
 
 const postLogIn = passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/log-in',
+    failureMessage: true,
 })
 
 //exports
