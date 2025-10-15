@@ -25,6 +25,22 @@ CREATE TABLE IF NOT EXISTS messages (
   timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   user_id INTEGER
 );
+
+INSERT INTO users
+  (username, password, name)
+  VALUES ('testuser', '1234abcd', 'Test User');
+
+INSERT INTO messages
+  (title, text, user_id)
+  VALUES ('Test Message', 'This is the first test message.', 1);
+
+INSERT INTO messages
+  (title, text, user_id)
+  VALUES ('Another Test', 'Here we are with a second test message.', 1);
+
+INSERT INTO messages
+  (title, text, user_id)
+  VALUES ('One Last Test', 'Observe: I am the third and final test message.', 1);
 `;
 
 async function main() {
