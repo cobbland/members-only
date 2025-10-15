@@ -12,6 +12,12 @@
                     <p><%= message.user_id %> (username goes here)</p>
                     <p><%= message.timestamp %></p>
                 <% } %>
+                <% if (locals.currentUser.admin) { %>
+                    <form action="/messages/delete" method="POST">
+                        <input type="hidden" name="messageID" id="messageID" value="<%= message.id %>" >
+                        <input type="submit" value="Delete">
+                    </form>
+                <% } %>
             <% } %>
         <% }) %>
         </div>

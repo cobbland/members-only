@@ -46,6 +46,20 @@ async function postNewMessage(req, res) {
     }
 }
 
+async function postDelete(req, res) {
+    const { messageID } = req.body;
+    try {
+        await db.deleteMessage(messageID);
+        res.redirect('/messages');
+    } catch(err) {
+        res.render('messages', {
+            title: 'Messages',
+            message: err,
+        });
+    }
+}
+
 module.exports = {
     getMessages, getNewMessage, postNewMessage,
+    postDelete,
 };

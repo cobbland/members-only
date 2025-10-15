@@ -8,4 +8,4 @@ Members Only is a semiprivate message board, made as part of [The Odin Project](
 - [x] Add login
 - [x] Add members posting messages
 - [x] Add different message views
-- [ ] Add admins deleting messages
+- [x] Add admins deleting messages

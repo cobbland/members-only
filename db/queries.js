@@ -83,8 +83,20 @@ async function insertMessage(title, text, userID) {
     }
 }
 
+async function deleteMessage(messageID) {
+    try {
+        await pool.query(`
+            DELETE FROM messages
+            WHERE id = $1;  
+        `, [ messageID ]);
+    } catch(err) {
+        throw new Error(err);
+    }
+}
+
 module.exports = {
     insertUser, selectUser, selectUserByID,
     joinClub, makeAdmin,
     selectAllMessages, insertMessage,
+    deleteMessage,
 }
