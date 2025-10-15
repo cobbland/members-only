@@ -10,3 +10,5 @@ Members Only is a semiprivate message board, made as part of [The Odin Project](
 - [x] Add different message views
 - [x] Add admins deleting messages
 - [ ] Add session store
+- [ ] Add logging out
+- [ ] style?
