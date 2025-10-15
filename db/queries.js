@@ -1,12 +1,12 @@
 const pool = require('./pool');
 
-async function insertUser(username, password, givenName, familyName) {
+async function insertUser(username, password, name) {
     try {
         await pool.query(`
         INSERT INTO users
-        (username, password, given_name, family_name)
-        VALUES ($1, $2, $3, $4);
-    `, [username, password, givenName, familyName]);
+        (username, password, name)
+        VALUES ($1, $2, $3);
+    `, [username, password, name]);
     } catch(err) {
         throw new Error(err);
     }
@@ -62,10 +62,10 @@ async function makeAdmin(username) {
 
 async function selectAllMessages() {
     try {
-        const messages = await pool.query(`
+        const { rows } = await pool.query(`
             SELECT * FROM messages;    
         `)
-        return messages;
+        return rows;
     } catch(err) {
         throw new Error(err);
     }

@@ -3,11 +3,18 @@
 <p><%= locals.message %></p>
 
 <% if (locals.messages.length > 0) { %>
-    <ul>
+    <div class="message-card">
         <% locals.messages.forEach(message => { %>
-            <li><%= message.text %></li>
+            <h2><%= message.title %></h2>
+            <p><%= message.text %></p>
+            <% if (locals.currentUser) { %>
+                <% if (locals.currentUser.membership) { %> 
+                    <p><%= message.user_id %> (username goes here)</p>
+                    <p><%= message.timestamp %></p>
+                <% } %>
+            <% } %>
         <% }) %>
-    </ul>
+        </div>
 <% } else { %>
     <p>There are no messages...</p>
 <% } %>

@@ -20,8 +20,7 @@ const validateUser = [
             throw new Error('Passwords must match');
         }
     }),
-    body('givenName').trim(),
-    body('familyName').trim(),
+    body('name').trim(),
 ];
 
 const validateClubPassword = body('clubPassword').custom(value => {
@@ -33,7 +32,7 @@ const validateClubPassword = body('clubPassword').custom(value => {
 });
 
 const validateAdminPassword = body('adminPassword').custom(value => {
-    if (value === '753694') {
+    if (value === 'gravy47289') {
         return true;
     } else {
         throw new Error('That is not the admin password')
@@ -51,7 +50,7 @@ function getSignUp(req, res) {
 async function postSignUp(req, res) {
     const {
         username, password, 
-        givenName, familyName,
+        name,
     } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -60,21 +59,19 @@ async function postSignUp(req, res) {
             message: 'Problem(s):',
             errors: errors.array(),
             username: username,
-            givenName: givenName,
-            familyName: familyName,
+            name: name,
         });
     }
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        await db.insertUser(username, hashedPassword, givenName, familyName);
-        res.redirect('/sign-up/join-club');
+        await db.insertUser(username, hashedPassword, name);
+        res.redirect('/log-in');
     } catch(err) {
         res.render('sign-up', {
             title: 'Sign Up',
             message: err,
             username: username,
-            givenName: givenName,
-            familyName: familyName,
+            name: name,
         });
     }
 }

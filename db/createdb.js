@@ -5,12 +5,15 @@ require('dotenv').config()
 const { Client } = require('pg');
 
 const SQL =`
+DROP TABLE users;
+
+DROP TABLE messages;
+
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   username VARCHAR ( 255 ) UNIQUE NOT NULL,
   password VARCHAR ( 255 ) NOT NULL,
-  given_name VARCHAR ( 255 ),
-  family_name VARCHAR ( 255 ),
+  name VARCHAR ( 255 ),
   membership BOOLEAN DEFAULT false,
   admin BOOLEAN DEFAULT false
 );

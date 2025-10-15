@@ -2,7 +2,7 @@ const db = require('../db/queries');
 
 async function getMessages(req, res) {
     try {
-        const messages = db.selectAllMessages
+        const messages = await db.selectAllMessages();
         res.render('messages', {
             title: 'Messages',
             message: 'Here are all the messages:',
