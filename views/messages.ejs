@@ -9,8 +9,12 @@
             <p><%= message.text %></p>
             <% if (locals.currentUser) { %>
                 <% if (locals.currentUser.membership) { %> 
-                    <p><%= message.user_id %> (username goes here)</p>
-                    <p><%= message.timestamp %></p>
+                    <% if (message.name) { %>
+                        <p>By <%= message.name %></p>
+                    <% } else { %> 
+                        <p>By <%= message.username %></p>
+                    <% } %>
+                    <p>On <%= message.timestamp %></p>
                 <% } %>
                 <% if (locals.currentUser.admin) { %>
                     <form action="/messages/delete" method="POST">

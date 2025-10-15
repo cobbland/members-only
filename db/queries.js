@@ -63,7 +63,11 @@ async function makeAdmin(username) {
 async function selectAllMessages() {
     try {
         const { rows } = await pool.query(`
-            SELECT * FROM messages;    
+            SELECT 
+            messages.id, messages.title, messages.text, messages.timestamp,
+            users.username, users.name 
+            FROM messages
+            JOIN users ON user_id = users.id;    
         `)
         return rows;
     } catch(err) {
