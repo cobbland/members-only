@@ -71,8 +71,20 @@ async function selectAllMessages() {
     }
 }
 
+async function insertMessage(title, text, userID) {
+    try {
+        await pool.query(`
+            INSERT INTO messages
+            (title, text, user_id)
+            VALUES ($1, $2, $3);
+        `, [ title, text, userID ]);
+    } catch(err) {
+        throw new Error(err);
+    }
+}
+
 module.exports = {
     insertUser, selectUser, selectUserByID,
     joinClub, makeAdmin,
-    selectAllMessages,
+    selectAllMessages, insertMessage,
 }

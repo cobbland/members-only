@@ -6,6 +6,6 @@ Members Only is a semiprivate message board, made as part of [The Odin Project](
 
 - [x] Add sign-up validation, including a [custom validator](https://express-validator.github.io/docs/guides/customizing/)
 - [x] Add login
-- [ ] Add members posting messages
-- [ ] Add different message views
+- [x] Add members posting messages
+- [x] Add different message views
 - [ ] Add admins deleting messages
