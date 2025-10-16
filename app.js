@@ -3,7 +3,9 @@ const express = require('express');
 const path = require('node:path');
 const session = require('express-session');
 const passport = require('passport');
+const pool = require('./db/pool');
 
+require('dotenv').config();
 require('./config/passport')(passport);
 
 // initializations and such
@@ -14,9 +16,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(session({
-    secret: "cat's cradle",
+    store: new (require('connect-pg-simple')(session))({
+        pool: pool,
+        createTableIfMissing: true,
+    }),
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookies: {
+        secure: process.env.NODE_ENV === "production",
+    },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
