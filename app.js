@@ -25,6 +25,8 @@ app.use(session({
     saveUninitialized: false,
     cookies: {
         secure: process.env.NODE_ENV === "production",
+        maxAge: 1000 * 60 * 60 * 24,
+        rolling: true,
     },
 }));
 app.use(passport.initialize());
