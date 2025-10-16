@@ -18,7 +18,9 @@
 
     <% if (locals.currentUser) { %>
         <p class="user-info">Logged in as <%= locals.currentUser.username %>.
-            <a href="/log-out">Log out?</a>
+            <form action="/log-out" method="POST">
+                <input type="submit" value="Log Out">
+            </form>
         </p>
     <% } %>
 </header>
